@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import './App.css'
 
-const API_URL = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '')
+const DEFAULT_PRODUCTION_API_URL = 'https://zulueta-ross-nathaniel-lab6-backend.onrender.com'
+const API_URL = (import.meta.env.VITE_API_URL || (import.meta.env.PROD ? DEFAULT_PRODUCTION_API_URL : '')).replace(/\/$/, '')
 const emptyForm = { product_name: '', description: '', price: '', quantity: '' }
 
 async function request(path, { token, ...options } = {}) {
@@ -16,6 +17,9 @@ async function request(path, { token, ...options } = {}) {
       },
     })
   } catch {
+    if (API_URL) {
+      throw new Error(`Cannot connect to the LavaLust API at ${API_URL}. Check that the Render backend is running and allows this frontend origin.`)
+    }
     throw new Error('Cannot reach the LavaLust API. Start it with “php lava serve 3000” and try again.')
   }
 

@@ -1,5 +1,12 @@
 # React + Vite
 
+## Render deployment
+
+- Frontend: https://zulueta-ross-nathaniel-lavalust-frontend.onrender.com/
+- Backend API: https://zulueta-ross-nathaniel-lab6-backend.onrender.com/
+
+The production build reads `VITE_API_URL` from `.env.production` and sends API requests to the Render backend.
+
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
 Currently, two official plugins are available:
